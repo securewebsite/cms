@@ -500,7 +500,9 @@ class Cp
                 'data' => ['icon' => 'edit'],
                 'class' => ['icon', 'icon-btn'],
                 'aria' => [
-                    'label' => Craft::t('app', 'Edit'),
+                    'label' => Craft::t('app', 'Edit {type}', [
+                        'type' => $element::lowerDisplayName(),
+                    ]),
                 ]
             ]);
         }
