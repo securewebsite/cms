@@ -493,6 +493,18 @@ class Cp
             $innerHtml .= '</span></div>';
         }
 
+        $showEditBtn = true;
+
+        if ($showEditBtn) {
+            $innerHtml .= Html::tag('button', '', [
+                'data' => ['icon' => 'edit'],
+                'class' => ['icon', 'icon-btn'],
+                'aria' => [
+                    'label' => Craft::t('app', 'Edit'),
+                ]
+            ]);
+        }
+
         if ($showStatus) {
             if ($isDraft) {
                 $innerHtml .= Html::tag('span', '', [
