@@ -8,6 +8,7 @@ Craft.BaseElementIndexView = Garnish.Base.extend(
     $container: null,
     $loadingMoreSpinner: null,
     $elementContainer: null,
+    $editBtn: null,
     $scroller: null,
 
     elementIndex: null,
@@ -36,6 +37,7 @@ Craft.BaseElementIndexView = Garnish.Base.extend(
       // Get the actual elements container and its child elements
       this.$elementContainer = this.getElementContainer();
       var $elements = this.$elementContainer.children();
+      this.$editBtn = this.$elementContainer.find('[data-edit-element]');
 
       this.setTotalVisible($elements.length);
       this.setMorePending(
@@ -104,17 +106,10 @@ Craft.BaseElementIndexView = Garnish.Base.extend(
 
         if (!this.elementIndex.trashed) {
           this.addListener(
-            this.$elementContainer,
-            'dblclick',
+            this.$editBtn,
+            'click',
             this._handleElementEditing
           );
-          if ($.isTouchCapable()) {
-            this.addListener(
-              this.$elementContainer,
-              'taphold',
-              this._handleElementEditing
-            );
-          }
         }
       }
 

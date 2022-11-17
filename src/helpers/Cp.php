@@ -497,7 +497,10 @@ class Cp
 
         if ($showEditBtn) {
             $innerHtml .= Html::tag('button', '', [
-                'data' => ['icon' => 'edit'],
+                'data' => [
+                    'icon' => 'edit',
+                    'edit-element' => true,
+                ],
                 'class' => ['icon', 'icon-btn'],
                 'aria' => [
                     'label' => Craft::t('app', 'Edit {type}', [
