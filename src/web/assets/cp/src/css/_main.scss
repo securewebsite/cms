@@ -2477,10 +2477,9 @@ $baseElementSidePadding: 7px;
 $elementInnerSpacing: 5px;
 
 .element {
-  --touch-target-size: 40px;
   --button-spacing: 3px;
-  --button-side-padding: 30px;
-  //--button-side-padding: calc(var(--touch-target-size) + 7px);
+  --label-spacing: 10px;
+  --button-side-padding: calc(var(--touch-target-size) + var(--button-spacing) + var(--label-spacing));
   position: relative;
   cursor: default;
   user-select: none;
@@ -2649,7 +2648,7 @@ $elementInnerSpacing: 5px;
   &.removable,
   &.editable {
     .label {
-      @include padding-right(var(--xl));
+      @include padding-right(var(--button-side-padding));
     }
 
     .delete:before {
@@ -2674,7 +2673,7 @@ $elementInnerSpacing: 5px;
   }
 
   &.removable.editable {
-    --button-side-padding: 60px;
+    --button-side-padding: calc((var(--touch-target-size) * 2) + var(--button-spacing) + var(--label-spacing));
 
     .edit-btn {
       @include right(
