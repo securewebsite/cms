@@ -2755,6 +2755,10 @@ $checkboxPadding: $checkboxSize + 4;
     .move + .toggle {
       @include margin-left(calc(var(--touch-target-size) * -2));
     }
+
+    .edit-btn {
+      display: none;
+    }
   }
 
   // thumbs views

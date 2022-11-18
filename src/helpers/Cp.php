@@ -329,10 +329,12 @@ class Cp
         bool $showDraftName = true,
         bool $single = false,
         bool $autoReload = true,
+        bool $isEditable = false,
     ): string {
         $isDraft = $element->getIsDraft();
         $isRevision = !$isDraft && $element->getIsRevision();
         $label = $element->getUiLabel();
+        $labelId = $showLabel ? "element-label-$element->id" : null;
         $showStatus = $showStatus && ($isDraft || $element::hasStatuses());
 
         // Create the thumb/icon image, if there is one
@@ -418,6 +420,7 @@ class Cp
         if ($user) {
             if ($elementsService->canView($element, $user)) {
                 $attributes['data']['editable'] = true;
+                $isEditable = true;
             }
 
             if ($context === 'index') {
@@ -453,7 +456,7 @@ class Cp
         $innerHtml .= $imgHtml;
 
         if ($showLabel) {
-            $innerHtml .= '<div class="label">';
+            $innerHtml .= "<div id=\"$labelId\" class=\"label\">";
             $innerHtml .= '<span class="title">';
 
             $encodedLabel = Html::encode($label);
@@ -493,19 +496,18 @@ class Cp
             $innerHtml .= '</span></div>';
         }
 
-        $showEditBtn = true;
-
-        if ($showEditBtn) {
+        if ($isEditable) {
             $innerHtml .= Html::tag('button', '', [
                 'data' => [
                     'icon' => 'edit',
                     'edit-element' => true,
                 ],
-                'class' => ['icon', 'icon-btn'],
+                'class' => ['icon', 'icon-btn', 'edit-btn'],
                 'aria' => [
                     'label' => Craft::t('app', 'Edit {type}', [
                         'type' => $element::lowerDisplayName(),
                     ]),
+                    'describedby' => $labelId,
                 ]
             ]);
         }
