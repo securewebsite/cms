@@ -2673,6 +2673,15 @@ $elementInnerSpacing: 5px;
       display: none;
     }
   }
+
+  .edit-btn {
+    display: none;
+
+    .field &,
+    .thumbsview & {
+      display: flex;
+    }
+  }
 }
 
 $checkboxPadding: $checkboxSize + 4;
