@@ -2677,7 +2677,14 @@ $elementInnerSpacing: 5px;
     --button-side-padding: 60px;
 
     .edit-btn {
-      @include right(calc((var(--touch-target-size) + $baseElementSidePadding + var(--button-spacing))));
+      @include right(
+        calc(
+          (
+            var(--touch-target-size) + $baseElementSidePadding +
+              var(--button-spacing)
+          )
+        )
+      );
     }
   }
 

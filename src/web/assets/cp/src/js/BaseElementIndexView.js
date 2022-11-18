@@ -105,11 +105,7 @@ Craft.BaseElementIndexView = Garnish.Base.extend(
         };
 
         if (!this.elementIndex.trashed) {
-          this.addListener(
-            this.$editBtn,
-            'click',
-            this._handleElementEditing
-          );
+          this.addListener(this.$editBtn, 'click', this._handleElementEditing);
         }
       }
 
