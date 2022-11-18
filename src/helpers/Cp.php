@@ -420,6 +420,7 @@ class Cp
         if ($user) {
             if ($elementsService->canView($element, $user)) {
                 $attributes['data']['editable'] = true;
+                $attributes['class'][] = 'editable';
                 $isEditable = true;
             }
 
@@ -439,19 +440,6 @@ class Cp
         }
 
         $innerHtml = '';
-
-        if ($context === 'field' && $inputName !== null) {
-            $innerHtml .= Html::hiddenInput($inputName . ($single ? '' : '[]'), (string)$element->id) .
-                Html::button('', [
-                    'class' => ['delete', 'icon'],
-                    'title' => Craft::t('app', 'Remove'),
-                    'aria' => [
-                        'label' => Craft::t('app', 'Remove {label}', [
-                            'label' => $label,
-                        ]),
-                    ],
-                ]);
-        }
 
         $innerHtml .= $imgHtml;
 
@@ -508,8 +496,22 @@ class Cp
                         'type' => $element::lowerDisplayName(),
                     ]),
                     'describedby' => $labelId,
-                ]
+                ],
+                'type' => 'button',
             ]);
+        }
+
+        if ($context === 'field' && $inputName !== null) {
+            $innerHtml .= Html::hiddenInput($inputName . ($single ? '' : '[]'), (string)$element->id) .
+                Html::button('', [
+                    'class' => ['delete', 'icon-btn', 'icon'],
+                    'title' => Craft::t('app', 'Remove'),
+                    'aria' => [
+                        'label' => Craft::t('app', 'Remove {label}', [
+                            'label' => $label,
+                        ]),
+                    ],
+                ]);
         }
 
         if ($showStatus) {

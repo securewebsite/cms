@@ -2477,6 +2477,10 @@ $baseElementSidePadding: 7px;
 $elementInnerSpacing: 5px;
 
 .element {
+  --touch-target-size: 40px;
+  --button-spacing: 3px;
+  --button-side-padding: 30px;
+  //--button-side-padding: calc(var(--touch-target-size) + 7px);
   position: relative;
   cursor: default;
   user-select: none;
@@ -2572,7 +2576,7 @@ $elementInnerSpacing: 5px;
         top: calc(50% - 5px);
       }
 
-      .icon:not(.delete) {
+      .icon:not(.delete):not(.edit-btn) {
         position: absolute;
         @include left($baseElementSidePadding - 1);
         top: calc(50% - 11px);
@@ -2642,9 +2646,10 @@ $elementInnerSpacing: 5px;
     }
   }
 
-  &.removable {
+  &.removable,
+  &.editable {
     .label {
-      @include padding-right(20px);
+      @include padding-right(var(--xl));
     }
 
     .delete:before {
@@ -2653,16 +2658,10 @@ $elementInnerSpacing: 5px;
 
     &.small,
     &.large:not(.hasthumb) {
-      .delete {
+      .icon-btn {
         position: absolute;
-        top: calc(50% - 11px);
-        @include right($baseElementSidePadding);
-      }
-    }
-
-    &.large.hasthumb {
-      .delete {
-        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
         @include right($baseElementSidePadding);
       }
     }
@@ -2674,12 +2673,26 @@ $elementInnerSpacing: 5px;
     }
   }
 
+  &.removable.editable {
+    --button-side-padding: 60px;
+
+    .edit-btn {
+      @include right(calc((var(--touch-target-size) + $baseElementSidePadding + var(--button-spacing))));
+    }
+  }
+
   .edit-btn {
     display: none;
 
     .field &,
     .thumbsview & {
       display: flex;
+    }
+
+    .field & {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
 }
