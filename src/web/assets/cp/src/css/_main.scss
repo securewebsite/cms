@@ -2479,7 +2479,9 @@ $elementInnerSpacing: 5px;
 .element {
   --button-spacing: 3px;
   --label-spacing: 10px;
-  --button-side-padding: calc(var(--touch-target-size) + var(--button-spacing) + var(--label-spacing));
+  --button-side-padding: calc(
+    var(--touch-target-size) + var(--button-spacing) + var(--label-spacing)
+  );
   position: relative;
   cursor: default;
   user-select: none;
@@ -2673,7 +2675,10 @@ $elementInnerSpacing: 5px;
   }
 
   &.removable.editable {
-    --button-side-padding: calc((var(--touch-target-size) * 2) + var(--button-spacing) + var(--label-spacing));
+    --button-side-padding: calc(
+      (var(--touch-target-size) * 2) + var(--button-spacing) +
+        var(--label-spacing)
+    );
 
     .edit-btn {
       @include right(
@@ -2689,17 +2694,6 @@ $elementInnerSpacing: 5px;
 
   .edit-btn {
     display: none;
-
-    .field &,
-    .thumbsview & {
-      display: flex;
-    }
-
-    .field & {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-    }
   }
 }
 
@@ -2803,6 +2797,10 @@ $checkboxPadding: $checkboxSize + 4;
     display: grid;
     gap: 5px;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+
+    .editable .edit-btn {
+      display: flex;
+    }
 
     li {
       position: relative;
@@ -5633,6 +5631,10 @@ fieldset {
   & > .notice,
   & > .warning {
     margin: 5px 0 0;
+  }
+
+  .editable .edit-btn {
+    display: flex;
   }
 }
 
