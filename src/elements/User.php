@@ -912,6 +912,8 @@ class User extends Element implements IdentityInterface
             $query->andWhere(['not', ['elements.id' => $this->id]]);
         }
 
+        $query->andWhere(['or', ['active' => true], ['pending' => true]]);
+
         if ($query->exists()) {
             $validator->addError($this, $attribute, Craft::t('yii', '{attribute} "{value}" has already been taken.'), $params);
         }
